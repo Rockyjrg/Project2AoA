@@ -80,6 +80,8 @@ public class OrderAlgo {
 		//close the file
 		scan.close();
 		
+		
+		
 	}
 }
 	
