@@ -20,7 +20,7 @@ public class OrderAlgo {
 	}
 	
 	//method to add each query to the ArrayList if != empty
-	public void addQuery( User querys ) {
+	public void readQueries( User querys ) {
 		if ( querys != null ) {
 			query.add(querys);
 		}
@@ -70,7 +70,7 @@ public class OrderAlgo {
 				String line = scan.nextLine();
 				String tokens[] = line.split(",");
 				User query = new User( Double.parseDouble( tokens[0] ), Double.parseDouble( tokens[1] ), Integer.parseInt(tokens[2]));
-				this.addQuery(query);
+				this.readQueries(query);
 			}
 		}
 		catch (FileNotFoundException e) {
@@ -79,10 +79,38 @@ public class OrderAlgo {
 		
 		//close the file
 		scan.close();
-		
-		
-		
 	}
+	
+	//Compute the distance with the haversine formula
+	//given in the store.java class
+	public void computeDistance() {
+		//iterate through each 'User' object in query
+		//and calculate the distance between the coordinates
+		//and each store
+		for (User user : query) {
+			for (Store store : stores) {
+				store.computeDistance(user.otherLat, user.otherLong);
+			}
+		}
+	}
+	
+	//Parititon algorithm to be used in the Rand-Select algorithm
+	//to partition the array in two subproblems
+	private int Partition(ArrayList<Store> stores, int left, int right) {
+		Random rand = new Random();
+		int randomIndex = rand.nextInt(right - left + 1) + left;
+		
+		//Swap random pivot with left element
+		Store pivotStore = stores.get(randomIndex);
+		stores.set(randomIndex, stores.get(left));
+		stores.set(left, pivotStore);
+		
+		double pivot = pivotStore.getDistance();
+		
+		
+		return i;
+	}
+	
 }
 	
 

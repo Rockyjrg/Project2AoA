@@ -8,6 +8,9 @@ public class OrderTest {
 		
 		whataburger.addStore( "data/WhataburgerData.csv" );
 			
+		OrderAlgo query = new OrderAlgo("Query");
+		
+		query.readQueries( "data/Queries.csv" );
 	}
 
 }
