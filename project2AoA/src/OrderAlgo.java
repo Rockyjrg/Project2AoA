@@ -126,10 +126,55 @@ public class OrderAlgo {
 		return i;
 	}
 	
-	public Store randSelect(Array<Store> stores, int left, int right, int i) {
+	public Store randSelect(ArrayList<Store> stores, int left, int right, int i) {
+		if ( left == right ) {
+			return stores.get(left);
+		}
 		
+		int pivotIndex = partition(stores, left, right);
+		int k = pivotIndex - left; //rank of pivot
+		
+		if ( i==k ) {
+			return stores.get( pivotIndex );
+		} else if ( i < k ) {
+			return randSelect( stores, left, pivotIndex - 1, i );
+		} else {
+			return randSelect( stores, pivotIndex + 1, right, i-(k+1) );
+		}
 	}
 	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		OrderAlgo orderAlgo = new OrderAlgo("Whataburger");
+		
+		orderAlgo.addStore( "data/WhataburgerData.csv" );
+		
+		orderAlgo.readQueries( "data/Queries.csv" );
+		
+		orderAlgo.computeDistance();
+		
+		for ( User user : orderAlgo.query ) { 
+			Store closestStore = orderAlgo.randSelect(orderAlgo.stores, 0, orderAlgo.stores.size() - 1, user.numStoresDesired - 1 );
+			
+			//collect stores less than cloesestStore
+			ArrayList<Store> closestStores = new ArrayList<Store>();
+			for ( Store store : orderAlgo.stores ) {
+				if ( store.getDistance() <= closestStore.getDistance() ) {
+					closestStores.add(store);
+				}
+			}
+			
+			//sort closest Stores based on distance
+			Collections.sort(closestStores, Comparator.comparingDouble(Store::getDistance));
+			
+			System.out.println("The " + user.numStoresDesired + " closest Stores to (" + user.otherLat + ", " + user.otherLong + "): ");
+			for ( int i = 0 ; i < user.numStoresDesired && i < closestStores.size(); i++ ) {
+				Store store = closestStores.get(i);
+				System.out.println(store);
+			}
+		}
+		System.out.println();
+	}
 }
 	
 
