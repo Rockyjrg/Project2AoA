@@ -96,7 +96,7 @@ public class OrderAlgo {
 	
 	//Parititon algorithm to be used in the Rand-Select algorithm
 	//to partition the array in two subproblems
-	private int Partition(ArrayList<Store> stores, int left, int right) {
+	public int partition(ArrayList<Store> stores, int left, int right) {
 		Random rand = new Random();
 		int randomIndex = rand.nextInt(right - left + 1) + left;
 		
@@ -106,9 +106,28 @@ public class OrderAlgo {
 		stores.set(left, pivotStore);
 		
 		double pivot = pivotStore.getDistance();
+		int i = left;
 		
+		for (int j = left + 1; j <= right; j++) {
+			if (stores.get(j).getDistance() <= pivot) {
+				i++;
+				//Swap stores[i] and stores[j]
+				Store temp = stores.get(i);
+				stores.set( i, stores.get(j) );
+				stores.set(j, temp);
+			}
+		}
+		
+		//Swap stores[left] and stores[i]
+		Store temp = stores.get(left);
+		stores.set(left, stores.get(i));
+		stores.set(i, temp);
 		
 		return i;
+	}
+	
+	public Store randSelect(Array<Store> stores, int left, int right, int i) {
+		
 	}
 	
 }

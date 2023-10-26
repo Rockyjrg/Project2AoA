@@ -49,4 +49,9 @@ public class Store {
 		return "Store #" + id + ". " + address + ", " + city + ", " + state + ", " + zipCode + "." + latitude + "," + longitude;
 	}
 
+	public double getDistance() {
+		// TODO Auto-generated method stub
+		return distance;
+	}
+
 }
