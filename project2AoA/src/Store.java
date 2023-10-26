@@ -13,7 +13,7 @@ public class Store {
 	public double latitude;
 	public double longitude;
 	public double distance;
-	
+
 	public Store(String theID, String theAddress, String theCity, String theState, String theZip, double theLat, double theLong) {
 		
 		id = theID;

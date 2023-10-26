@@ -5,11 +5,11 @@ public class OrderAlgo {
 	
 	public String name;
 	public ArrayList<Store> stores;
-	public ArrayList<Store> query;
+	public ArrayList<User> query;
 	
 	public OrderAlgo( String name ) {
 		stores = new ArrayList<Store>();
-		query = new ArrayList<Store>();
+		query = new ArrayList<User>();
 	}
 	
 	//method to add the store to the ArrayList if it isn't empty
@@ -20,7 +20,7 @@ public class OrderAlgo {
 	}
 	
 	//method to add each query to the ArrayList if != empty
-	public void addQuery( Store querys ) {
+	public void addQuery( User querys ) {
 		if ( querys != null ) {
 			query.add(querys);
 		}
@@ -69,11 +69,10 @@ public class OrderAlgo {
 			while( scan.hasNextLine() ) {
 				String line = scan.nextLine();
 				String tokens[] = line.split(",");
-				Store query = new Store( tokens[0], tokens[1], tokens[2] );
+				User query = new User( Double.parseDouble( tokens[0] ), Double.parseDouble( tokens[1] ), Integer.parseInt(tokens[2]));
 				this.addQuery(query);
 			}
 		}
-		} 
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -82,5 +81,6 @@ public class OrderAlgo {
 		scan.close();
 		
 	}
-	
 }
+	
+
