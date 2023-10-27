@@ -46,11 +46,10 @@ public class Store {
 	
 	public String toString() {
 		
-		return "Store #" + id + ". " + address + ", " + city + ", " + state + ", " + zipCode + "." + latitude + "," + longitude;
+		return "Store #" + id + ". " + address + ", " + city + ", " + state + ", " + zipCode + "." + " - " + distance + " miles";
 	}
 
 	public double getDistance() {
-		// TODO Auto-generated method stub
 		return distance;
 	}
 
